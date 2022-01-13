@@ -1,3 +1,5 @@
+const hello = require("./main");
+
 //       ***********************
 //            INSTRUCTIONS
 //       ***********************
@@ -14,6 +16,9 @@ let board = [
   ['','',''],
   ['','','']
 ];
+
+hello.horizontalWin();
+
 
 // is called when a square is clicked. "this" = element here
 const handleClick = (element) => {
@@ -38,6 +43,7 @@ const addMarker = (id) => {
   
   // Arrange the above pieces into a single line of code
   // to add an X or O to the board to the DOM so it can be scene on the screen.
+  document.getElementById(id).innerHTML = currentMarker
 }
 
 // passes the element's id attribute from HTML to be used
@@ -64,17 +70,7 @@ const checkForWin = () => {
   }
 }
 
-const horizontalWin = () => {
-  // @TODO, Your code here: to check for horizontal wins
-}
 
-const verticalWin = () => {
-  // @TODO, Your code here: to check for vertical wins
-}
-
-const diagonalWin = () => {
-  // @TODO, Your code here: to check for diagonal wins
-}
 
 const changeMarker = () => {
   // ternary operator: if it's an X make it an O, if O make it an X
