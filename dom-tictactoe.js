@@ -1,5 +1,3 @@
-const hello = require("./main");
-
 //       ***********************
 //            INSTRUCTIONS
 //       ***********************
@@ -17,7 +15,7 @@ let board = [
   ['','','']
 ];
 
-hello.horizontalWin();
+
 
 
 // is called when a square is clicked. "this" = element here
@@ -54,7 +52,7 @@ const updateBoard = (id) => {
 
   console.log(`you clicked the sq at ${row} and ${column}`)
   console.log(board)
-
+  board[row][column] = currentMarker
   // @TODO, Your code here: use the above information to change the board variable(array of arrays)
   // HINT: in your browser open up the dev tools -> console
 }
@@ -62,7 +60,7 @@ const updateBoard = (id) => {
 const checkForWin = () => {
   // calls each checkForWin possibility and if any are true gives a page alert,
   if(horizontalWin() || verticalWin() || diagonalWin()) {
-    // **BONUS** you could make the dismissal of this alert window reset the board...
+  
     window.alert(`Player ${currentMarker} won!`)
   } else {
     // if no win, change the marker from X to O, or O to X for the next player.
@@ -72,17 +70,58 @@ const checkForWin = () => {
 
 
 
+const horizontalWin = () => {
+  if ((board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X") || (board[0][0] == "O" && board[0][1] == "O" && board[0][2] == "O")) {
+      return true
+  } else if ((board[1][0] == "X" && board[1][1] == "X" && board[1][2] == "X") || (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O")) {
+      return true
+  } else if ((board[2][0] == "X" && board[2][1] == "X" && board[2][2] == "X") || (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O")) { 
+      return true
+  } else {
+      return false
+  }
+}
+
+const verticalWin = () => {
+  if ((board[0][0] == "X" && board[1][0] == "X" && board[2][0] == "X") || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")) {
+      return true
+  } else if ((board[0][1] == "X" && board[1][1] == "X" && board[2][1] == "X") || (board[0][1] == "O" && board[1][1] == "O" && board[2][1] == "O")) {
+      return true 
+  } else if ((board[0][2] == "X" && board[1][2] == "X" && board[2][2] == "X") || (board[0][2] == "O" && board[1][2] == "O" && board[2][2] == "O")) {
+      return true
+  } else {
+      return false
+  }
+}
+
+const diagonalWin = () => {
+  if ((board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X") || (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O")) {
+        return true
+    } else if ((board[0][2] == "X" && board[1][1] == "X" && board[2][0] == "X") || (board[0][2] == "O" && board[1][1] == "O" && board[2][0] == "O")) {
+        return true
+    } else {
+        return false
+    }
+}
+
+
 const changeMarker = () => {
   // ternary operator: if it's an X make it an O, if O make it an X
   currentMarker = currentMarker === "X" ? "O" : "X"
 }
 
 const resetBoard = () => {
+
+  board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""] 
+  ]
   // sanity check: this tells us the function is being called
   console.log("the board was cleared!")
 
   // collects all of the "td"s into an HTML Collection: https://www.w3schools.com/jsref/dom_obj_htmlcollection.asp  
-  const squares = document.getElementsByTagName("TD")
+  const squares = document.getElementsByTagName("td")
   
   // loops over the HTML Collections and clears out the Xs and Os
   for (i=0; i<squares.length; i++) {

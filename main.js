@@ -99,15 +99,6 @@ const getPrompt = () => {
   });
 }
 
-
-// module exports
-module.exports = { horizontalWin };
-
-
-
-
-
-
 // Unit Tests
 // You use them run the command: npm test main.js
 // to close them ctrl + C
