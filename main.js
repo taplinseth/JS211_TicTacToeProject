@@ -74,10 +74,18 @@ const diagonalWin = () => {
     }
 }
 
+const resetBoard = () => {
+  board = [
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+    [' ', ' ', ' ']
+  ];
+}
+
 const checkForWin = () => {
   if(horizontalWin() || verticalWin() || diagonalWin()) {
     console.log(`Player ${playerTurn} won!`)
-    return true;
+    resetBoard();
   } else {
     changeMarker()
   }
@@ -85,7 +93,6 @@ const checkForWin = () => {
 
 const ticTacToe = (row, column) => {
   board[row][column] = [playerTurn]
-  changeMarker();
 }
 
 const getPrompt = () => {
@@ -94,6 +101,7 @@ const getPrompt = () => {
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
+      checkForWin();
       getPrompt();
     });
   });
